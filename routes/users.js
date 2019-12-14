@@ -47,14 +47,18 @@ router.route('/user')
       where: {
         email: req.body.email, 
         password: req.body.password,
-      } 
+      }, 
+      include : ['note', 'userTag', 'userMedia']
     })
     .then(response => {
-      res.json({
+      response != null ? res.status(200).json({
         status: "success",
         message: "success",
         data: response
-      })
+      }): res.status(401).send({
+        status: "failed",
+        message: "Unauthenticated",
+      });
     });
   })
 
@@ -73,9 +77,10 @@ router.route('/note')
   })
   .post(function (req, res, next) {
     note.create({
-      user_id: 1234, 
+      user_id: req.body.user_id, 
       body: req.body.text,
       is_deleted_at: new Date(),
+      include : ['tag', 'tagMedia']
    })
    .then(response => {
        res.json({
