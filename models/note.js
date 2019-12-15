@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   note.associate = function(models) {
     // associations can be defined here
-    note.hasMany(models.tag, {foreignKey: 'note_id', as: 'tag'})
     note.hasMany(models.media, {foreignKey: 'note_id', as: 'tagMedia'})
   };
   return note;

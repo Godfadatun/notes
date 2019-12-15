@@ -48,7 +48,9 @@ router.route('/user')
         email: req.body.email, 
         password: req.body.password,
       }, 
-      include : ['note', 'userTag', 'userMedia']
+      include : ['note'],
+      order: [['note', 'id', 'DESC']]
+      
     })
     .then(response => {
       response != null ? res.status(200).json({
@@ -67,7 +69,11 @@ router.route('/user')
   // note Table
 router.route('/note')
   .get(function (req, res, next) {
-    note.findAll().then(response => {
+    note.findAll({
+      order: [
+        ['id', 'DESC'],
+      ]
+    }).then(response => {
       res.json({
         status: "success",
         message: "success",
@@ -79,8 +85,9 @@ router.route('/note')
     note.create({
       user_id: req.body.user_id, 
       body: req.body.text,
+      tags: req.body.tag.toString(),
       is_deleted_at: new Date(),
-      include : ['tag', 'tagMedia']
+      include : ['tagMedia']
    })
    .then(response => {
        res.json({
@@ -134,8 +141,7 @@ router.route('/tag')
   })
   .post(function (req, res, next) {
     tag.create({
-      user_id: 1234, 
-      note_id: 5678,
+      name: req.body.name, 
   })
   .then(response => {
       res.json({
@@ -155,15 +161,15 @@ router.route('/tag')
 
 
 // Delete ===========================
-router.put(function (req, res) {
-  user.destroy({
-    where: {
-      id: 1
-    }
-  }).then(() => {
-    console.log("Done");
-  });
-})
+// router.put(function (req, res) {
+//   user.destroy({
+//     where: {
+//       id: 1
+//     }
+//   }).then(() => {
+//     console.log("Done");
+//   });
+// })
 
 
 

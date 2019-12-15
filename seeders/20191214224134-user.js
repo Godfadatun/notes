@@ -18,6 +18,8 @@ module.exports = {
       email : 'admin@one.com',
       password : 'secret',
       is_admin : false,
+      createdAt : new Date(),
+      updatedAt : new Date(),
       
     }], {});
   },
@@ -30,5 +32,8 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
+    return queryInterface.bulkDelete('users', [{
+      name : 'admin'
+    }], {});
   }
 };

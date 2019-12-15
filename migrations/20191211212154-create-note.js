@@ -14,6 +14,9 @@ module.exports = {
       body: {
         type: Sequelize.TEXT
       },
+      tags: {
+        type: Sequelize.STRING
+      },
       is_deleted_at: {
         type: Sequelize.DATE
       },
