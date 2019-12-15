@@ -115,7 +115,7 @@ router.route('/media')
     media.create({
       user_id: 1234, 
       note_id: 5678,
-      media:'',
+      media: req.body.name,
       extension:'',
     })
     .then(response => {
