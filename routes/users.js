@@ -103,7 +103,7 @@ router.route('/note')
    // share Table
 router.route('/share')
 .get(function (req, res, next) {
-  share.findAll().then(response => {
+  user.findAll().then(response => {
     res.json({
       status: "success",
       message: "success",
@@ -113,9 +113,9 @@ router.route('/share')
 })
 .post(function (req, res, next) {
   share.create({
-    user_id: 'dummy data', 
-    note_id: 'dummy data',
-    sharable_id: 'dummy data',
+    user_id: req.body.user_id, 
+    note_id: req.body.note_id,
+    sharable_id: req.body.sharable_id,
   })
   .then(response => {
       res.json({
