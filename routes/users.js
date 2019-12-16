@@ -5,6 +5,7 @@ var tag = require('../models').tag
 var user = require('../models').user
 var media = require('../models').media
 var note = require('../models').note
+var share = require('../models').share
 // console.log(tag);
 
 
@@ -98,6 +99,32 @@ router.route('/note')
    });
  })
 
+
+   // share Table
+router.route('/share')
+.get(function (req, res, next) {
+  share.findAll().then(response => {
+    res.json({
+      status: "success",
+      message: "success",
+      data: response
+    })
+  });
+})
+.post(function (req, res, next) {
+  share.create({
+    user_id: 'dummy data', 
+    note_id: 'dummy data',
+    sharable_id: 'dummy data',
+  })
+  .then(response => {
+      res.json({
+        status: "success",
+        message: "success",
+        data: response
+      })
+  });
+})
 
 
   // media Table
