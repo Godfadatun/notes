@@ -71,6 +71,7 @@ router.route('/user')
 router.route('/note')
   .get(function (req, res, next) {
     note.findAll({
+      include : ['shareNote'],
       order: [
         ['id', 'DESC'],
       ]
@@ -103,7 +104,7 @@ router.route('/note')
    // share Table
 router.route('/share')
 .get(function (req, res, next) {
-  user.findAll().then(response => {
+  share.findAll().then(response => {
     res.json({
       status: "success",
       message: "success",
